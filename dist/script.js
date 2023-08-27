@@ -25,7 +25,7 @@ const createPoseLandmarker = async () => {
     const vision = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm");
     poseLandmarker = await PoseLandmarker.createFromOptions(vision, {
         baseOptions: {
-            modelAssetPath: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task`,
+            modelAssetPath: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/1/pose_landmarker_heavy.task`,
             delegate: "GPU"
         },
         runningMode: runningMode,
@@ -67,6 +67,8 @@ async function handleClick(event) {
     // different image data each time. The result is returned in a callback.
     poseLandmarker.detect(event.target, (result) => {
         console.log(result)
+        let myJsonString = JSON.stringify(result)
+        console.log(myJsonString)
         const canvas = document.createElement("canvas");
         canvas.setAttribute("class", "canvas");
         canvas.setAttribute("width", event.target.naturalWidth + "px");
